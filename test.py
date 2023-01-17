@@ -19,13 +19,6 @@ for col in df.columns[2:]:
 # Show the number of missing values in each column
 df.isnull().sum()
 
-# Based on each city of brazil make a choropleth map that shows the number of appointments in each city it should be interactive
-df_copy = df.copy()
-# make a choropleth map
-import plotly.express as px
-fig = px.choropleth(df_copy, locations="Neighbourhood", locationmode="Brazil", color="Neighbourhood", hover_name="Neighbourhood", animation_frame="Neighbourhood")
-fig.show()
-
 # show the rows where the age is less than 0 and count them, just 
 # to make sure that there are no negative values
 df[df['Age'] < 0].count()
@@ -35,3 +28,19 @@ df['Age'].max()
 
 # get a median value for the age column starting from the age 76
 df[df['Age'] > 75]['Age'].median()
+
+# make a correlation plot for df
+corr = df.corr()
+sns.heatmap(corr,
+            xticklabels=corr.columns.values,
+            yticklabels=corr.columns.values)
+
+# count the number of appointments based on the cities with less than a 1000 entries
+df['Neighbourhood'].value_counts()[df['Neighbourhood'].value_counts() < 1000]
+
+# replace the cities with less than 1000 entries with 'Other'
+df['Neighbourhood'] = df['Neighbourhood'].apply(lambda x: 'Other' if x in df['Neighbourhood'].value_counts()[df['Neighbourhood'].value_counts() < 1000].index else x)
+
+# create Columns for each Neighbourhood
+df = pd.get_dummies(df, columns=['Neighbourhood'])
+
