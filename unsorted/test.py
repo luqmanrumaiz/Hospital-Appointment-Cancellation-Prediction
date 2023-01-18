@@ -11,9 +11,46 @@ from sklearn import svm, preprocessing
 df = pd.read_csv('dataset-noshow.csv')
 df.head()
 
-# for col in df.columns:
-#     sns.countplot(x=col, data=df)
-#     plt.show()make graph for each column
+
+
+
+
+from sklearn.metrics import accuracy_score
+from sklearn.metrics import matthews_corrcoef
+from sklearn.metrics import f1_score
+
+from sklearn.neighbors import KNeighborsClassifier
+
+knn = KNeighborsClassifier(3) # Define classifier
+knn.fit(train_features, train_labels) # Train model
+
+# Make predictions
+train_pred = knn.predict(train_features)
+test_pred = knn.predict(test_features)
+
+
+# get the accuracy score
+print("Train Accuracy: ", accuracy_score(train_labels, train_pred))
+print("Test Accuracy: ", accuracy_score(test_labels, test_pred))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
