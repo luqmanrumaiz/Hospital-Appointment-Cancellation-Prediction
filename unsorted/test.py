@@ -40,7 +40,10 @@ print("Test Accuracy: ", accuracy_score(test_labels, test_pred))
 
 
 
+# visualise days waited using different sorts of graphs
 
+plt.scatter(df['No-show'], df['Age'])
+plt.show()
 
 
 
@@ -148,3 +151,11 @@ plt.show()
 train_features = train_features.drop(['Age'], axis=1)
 
 
+# doownload and load this dataset to pd https://www.kaggle.com/datasets/joniarroba/noshowappointments
+
+# import the libraries
+import numpy as np
+import pandas as pd
+from sklearn.model_selection import train_test_split
+
+# load the dataset
